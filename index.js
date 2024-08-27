@@ -7,6 +7,7 @@ const expressSession = require('express-session')
 const flash = require('connect-flash')
 require('dotenv').config()
 const connected = require('./connectMongo')
+const MongoStore = require('connect-mongo');
 
 
 //MVC
@@ -45,6 +46,22 @@ app.use('/posts/store',validateMiddleWare)
 app.use(expressSession({
     secret: "node secret",
 }))
+
+app.use(expressSession({
+    secret: process.env.SESSION_SECRET || 'node secret',
+    resave: false,
+    saveUninitialized: false,
+    store: MongoStore.create({
+        mongoUrl: process.env.MONGODB_CONNECT_URI,
+        collectionName: 'sessions'
+    }),
+    cookie: {
+        secure: process.env.NODE_ENV === 'production',
+        httpOnly: true,
+        maxAge: 1000 * 60 * 60 * 24
+    }
+}));
+
 app.use('*',(req,res,next) =>{
     loggedIn = req.session.userId
     next()
