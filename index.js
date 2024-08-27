@@ -6,6 +6,7 @@ const fileUpload = require('express-fileupload')
 const expressSession = require('express-session')
 const flash = require('connect-flash')
 require('dotenv').config()
+const connected = require('./connectMongo')
 
 
 //MVC
@@ -31,9 +32,7 @@ const validateMiddleWare = require('./middleware/validationmiddleware')
 const authMiddleWare = require('./middleware/authmiddleware')
 const redirectIfAuthenticatedMiddleWare = require('./middleware/redirectIfAuthenticatedMiddleware')
 
-mongoose.connect(process.env.MONGODB_CONNECT_URI,{
-    useNewUrlParser: true,
-})
+connected()
 
 global.loggedIn = null
 
