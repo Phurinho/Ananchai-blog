@@ -8,6 +8,7 @@ const flash = require('connect-flash')
 require('dotenv').config()
 const connected = require('./connectMongo')
 const MongoStore = require('connect-mongo');
+const path = require('path');
 
 
 //MVC
@@ -55,6 +56,7 @@ app.use('*',(req,res,next) =>{
 })
 app.use(flash())
 app.set('view engine','ejs')
+app.set('views', path.join(__dirname, 'views'));
 
 
 
