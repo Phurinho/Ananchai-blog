@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const fileUpload = require('express-fileupload')
 const expressSession = require('express-session')
 const flash = require('connect-flash')
+require('dotenv').config()
 
 
 //MVC
@@ -30,7 +31,7 @@ const validateMiddleWare = require('./middleware/validationmiddleware')
 const authMiddleWare = require('./middleware/authmiddleware')
 const redirectIfAuthenticatedMiddleWare = require('./middleware/redirectIfAuthenticatedMiddleware')
 
-mongoose.connect('mongodb+srv://admin:1234@cluster0.d3vxv.mongodb.net/test',{
+mongoose.connect(process.env.MONGODB_CONNECT_URI,{
     useNewUrlParser: true,
 })
 
@@ -87,9 +88,9 @@ app.post('/users/login',redirectIfAuthenticatedMiddleWare, loginUserController)
 
 app.use((req,res)=> res.render('notfound'))
 
+const PORT = process.env.PORT
 
-
-app.listen(4000, () => {
+app.listen(PORT, () => {
     console.log('App listening on port 4000');
   });
   
