@@ -29,6 +29,9 @@
                             <!-- https://startbootstrap.com/solution/contact-forms-->
                             <!-- to get an API token!-->
                             <form action="/posts/update" method="POST" enctype="multipart/form-data" id="contactForm" data-sb-form-api-token="API_TOKEN">
+                                
+                                <input type="hidden" name="id" value="<%= blogposts._id %>">
+                                
                                 <div class="form-floating">
                                     <label for="title">Title</label>
                                     <input class="form-control" value="<%= blogposts.title %>" id="title" name="title" type="title" placeholder="Enter your post title" data-sb-validations="required" />
@@ -43,6 +46,7 @@
                                 
                                 <div class="form-floating">
                                     <input type="file" class="form-control" id="image" name="image">
+                                       
                                 </div>
                                 
                                 <br />

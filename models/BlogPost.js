@@ -12,7 +12,7 @@ const BlogPostSchema = new Schema({
   },
   datePosted: {
     type: Date,
-    default: new Date(),
+    default: Date.now,
   },
   image: String,
 });
