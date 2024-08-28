@@ -7,7 +7,8 @@ const session = require('express-session'); // Corrected import
 const flash = require('connect-flash');
 require('dotenv').config();
 const connected = require('./connectMongo');
-const MongoStore = require('connect-mongo'); // Correct import for Mongo session store
+const MongoStore = require('connect-mongo')
+const path = require('path');; // Correct import for Mongo session store
 
 // Connect to MongoDB
 connected();
@@ -69,6 +70,10 @@ app.use(function(req, res, next) {
     }
     next();
 });
+
+
+app.set('views', path.join(__dirname, 'views')); // Make sure this points to the correct directory
+app.set('view engine', 'ejs');
 
 // Global variable middleware
 app.use('*', (req, res, next) => {

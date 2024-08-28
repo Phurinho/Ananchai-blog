@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
 
   if (req.session.userId) {
     // Corrected render syntax with proper parentheses
-    return res.render('mypost', { blogposts });
+    return res.render('myposts', { blogposts });
   }
 
   res.redirect('/auth/login');
